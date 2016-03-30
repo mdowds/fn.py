@@ -1,7 +1,8 @@
 from functools import partial, wraps, update_wrapper
 from inspect import getargspec
 
-from .op import identity
+# Copied the indexerror function from op.py to avoid a circular import
+identity = lambda arg: arg
 
 
 class F(object):

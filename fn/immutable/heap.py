@@ -95,8 +95,9 @@ class SkewHeap(_MergeBased):
         """
         if not self:
             return None, self._make_heap()
-        tmp_heap = self.left.union(self.right)
-        if not self.left:
+        if self.left:
+            tmp_heap = self.left.union(self.right)
+        else:
             tmp_heap = self._make_heap()
         return self.root, tmp_heap
 

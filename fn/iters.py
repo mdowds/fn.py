@@ -7,7 +7,7 @@ from sys import version_info
 
 from .func import F
 from .op import flip
-from .uniform import filterfalse, zip_longest
+from .uniform import *
 
 
 def take(limit, base):
