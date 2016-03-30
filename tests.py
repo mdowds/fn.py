@@ -2,19 +2,50 @@
 
 """Tests for Fn.py library"""
 
+import itertools
+import operator
 import sys
 import unittest
-import operator
-import itertools
 
-from fn import op, _, F, Stream, iters, underscore, monad, recur
+from fn import F, Stream, _, iters, monad, op, recur, underscore
+from fn.func import curried
+from fn.immutable import (Deque, LinkedList, PairingHeap, Queue, SkewHeap,
+                          Stack, Vector)
 from fn.uniform import reduce
-from fn.immutable import SkewHeap, PairingHeap, LinkedList, Stack, Queue, Vector, Deque
+
 
 class InstanceChecker(object):
     if sys.version_info[0] == 2 and sys.version_info[1] <= 6:
         def assertIsInstance(self, inst, cls):
             self.assertTrue(isinstance(inst, cls))
+
+
+class Curriedtest(unittest.TestCase):
+
+    def test_curried_wrapper(self):
+
+        @curried
+        def _child(a, b, c, d):
+            return a + b + c + d
+
+        @curried
+        def _moma(a, b):
+            return _child(a, b)
+
+        def _assert_instance(expected, acutal):
+            self.assertEqual(expected.__module__, acutal.__module__)
+            self.assertEqual(expected.__name__, acutal.__name__)
+
+        res1 = _moma(1)
+        _assert_instance(_moma, res1)
+        res2 = res1(2)
+        _assert_instance(_child, res2)
+        res3 = res2(3)
+        _assert_instance(_child, res3)
+        res4 = res3(4)
+
+        self.assertEqual(res4, 10)
+
 
 class OperatorTestCase(unittest.TestCase):
 
