@@ -2,14 +2,16 @@
 
 """Tests for Fn.py library"""
 
+import itertools
+import operator
 import sys
 import unittest
-import operator
-import itertools
 
-from fn import op, _, F, Stream, iters, underscore, monad, recur
+from fn import F, Stream, _, iters, monad, op, recur, underscore
+from fn.immutable import (Deque, LinkedList, PairingHeap, Queue, SkewHeap,
+                          Stack, Vector)
 from fn.uniform import reduce
-from fn.immutable import SkewHeap, PairingHeap, LinkedList, Stack, Queue, Vector, Deque
+
 
 class InstanceChecker(object):
     if sys.version_info[0] == 2 and sys.version_info[1] <= 6:
