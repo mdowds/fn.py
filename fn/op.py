@@ -2,6 +2,7 @@ from itertools import starmap
 from sys import version_info
 
 from .func import F
+from .uniform import reduce
 
 identity = lambda arg: arg
 
