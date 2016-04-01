@@ -3,6 +3,28 @@
 import os
 import sys
 
+from pkg_resources import get_distribution, DistributionNotFound
+
+try:
+    get_distribution('fn')
+    sys.stdout.write("""
+{delimiter}
+                   INSTALLATION ABORTED
+
+The module "fn" was found on this system. Unfortunately
+"fn.py" and "fn" cannot work together because they use the
+same package name, i.e. fn. The "fn" module is no longer
+maintained by the original author and "fn.py" is actually
+a maintained fork of that project.
+
+To complete this install, please uninstall "fn" (e.g.
+pip uninstall fn) and rerun the installation of "fn.py".
+{delimiter}
+""".format(delimiter='=' * 60))
+    sys.exit(0)
+except DistributionNotFound:
+    pass
+
 import fn
 
 try:
