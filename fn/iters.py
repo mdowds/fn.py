@@ -7,7 +7,7 @@ from sys import version_info
 
 from .func import F
 from .op import flip
-from .uniform import *
+from .uniform import filterfalse, zip_longest, map, range, filter
 
 
 def take(limit, base):
@@ -207,11 +207,20 @@ def iter_except(func, exception, first_=None):
     of a sentinel to end the loop.
 
     Examples:
-        iter_except(functools.partial(heappop, h), IndexError)   # priority queue iterator
-        iter_except(d.popitem, KeyError)                         # non-blocking dict iterator
-        iter_except(d.popleft, IndexError)                       # non-blocking deque iterator
-        iter_except(q.get_nowait, Queue.Empty)                   # loop over a producer Queue
-        iter_except(s.pop, KeyError)                             # non-blocking set iterator
+        # priority queue iterator
+        iter_except(functools.partial(heappop, h), IndexError)
+
+        # non-blocking dict iterator
+        iter_except(d.popitem, KeyError)
+
+        # non-blocking deque iterator
+        iter_except(d.popleft, IndexError)
+
+        # loop over a producer Queue
+        iter_except(q.get_nowait, Queue.Empty)
+
+        # non-blocking set iterator
+        iter_except(s.pop, KeyError)
 
     http://docs.python.org/3.4/library/itertools.html#itertools-recipes
     """

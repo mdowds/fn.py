@@ -14,12 +14,18 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
     sys.exit()
 
-short = 'Implementation of missing features to enjoy functional programming in Python'
+short = '''
+Implementation of missing features to enjoy functional programming in Python
+'''
 setup(
     name='fn.py',
     version=fn.__version__,
     description=short,
-    long_description=open('README.rst').read() + '\n\n' + open('HISTORY.rst').read(),
+    long_description=(
+        open('README.rst').read() +
+        '\n\n' +
+        open('HISTORY.rst').read()
+    ),
     author='fnpy team',
     author_email='vash0the0stampede@gmail.com',
     url='https://github.com/fnpy/fn.py',

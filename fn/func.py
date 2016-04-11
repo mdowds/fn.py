@@ -1,4 +1,4 @@
-from functools import partial, wraps, update_wrapper
+from functools import partial, update_wrapper, wraps
 from inspect import getargspec
 
 # Copied the indexerror function from op.py to avoid a circular import

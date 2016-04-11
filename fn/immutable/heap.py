@@ -130,7 +130,8 @@ class PairingHeap(_MergeBased):
 
     More information about performance bounds you can find here:
     "The Pairing Heap: A New Form of Self-Adjusting Heap"
-    [1] http://www.cs.cmu.edu/afs/cs.cmu.edu/user/sleator/www/papers/pairing-heaps.pdf
+    [1]
+http://www.cs.cmu.edu/afs/cs.cmu.edu/user/sleator/www/papers/pairing-heaps.pdf
 
     More general information on Wikipedia:
     [2] http://en.wikipedia.org/wiki/Pairing_heap
