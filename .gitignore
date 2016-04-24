@@ -83,3 +83,10 @@ ENV/
 
 # Spyder project settings
 .spyderproject
+
+# emacs files.
+*~
+
+# python conpiled files
+*pyc
+__pycache__
