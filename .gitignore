@@ -90,3 +90,6 @@ ENV/
 # python conpiled files
 *pyc
 __pycache__
+
+# Ignore .idea (jetbrains ide) files
+.idea/*
