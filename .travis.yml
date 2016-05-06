@@ -9,7 +9,7 @@ python:
 - pypy
 - pypy3
 script:
-- python tests.py
+- python -m unittest discover ./tests
 install:
 - python setup.py install
 notifications:
