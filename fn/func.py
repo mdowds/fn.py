@@ -1,7 +1,8 @@
-from functools import partial, wraps, update_wrapper
+from functools import partial, update_wrapper, wraps
 from inspect import getargspec
 
-from .op import flip, identity
+# Copied the indexerror function from op.py to avoid a circular import
+identity = lambda arg: arg
 
 
 class F(object):
@@ -21,7 +22,7 @@ class F(object):
 
     __slots__ = "f",
 
-    def __init__(self, f = identity, *args, **kwargs):
+    def __init__(self, f=identity, *args, **kwargs):
         self.f = partial(f, *args, **kwargs) if any([args, kwargs]) else f
 
     @classmethod
@@ -48,7 +49,7 @@ class F(object):
         """Overload << operator for F instances"""
         return self.__class__.__compose(self.f, self.__ensure_callable(g))
 
-    def  __call__(self, *args, **kwargs):
+    def __call__(self, *args, **kwargs):
         """Overload apply operator"""
         return self.f(*args, **kwargs)
 

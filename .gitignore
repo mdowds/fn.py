@@ -83,3 +83,13 @@ ENV/
 
 # Spyder project settings
 .spyderproject
+
+# emacs files.
+*~
+
+# python conpiled files
+*pyc
+__pycache__
+
+# Ignore .idea (jetbrains ide) files
+.idea/*
