@@ -1,10 +1,8 @@
 from itertools import starmap
 from sys import version_info
 
-from .func import F
+from .func import F, identity
 from .uniform import reduce
-
-identity = lambda arg: arg
 
 
 def _apply(f, args=None, kwargs=None):
