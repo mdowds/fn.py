@@ -1,17 +1,18 @@
+sudo: false
 language: python
-python:
-- 2.6
-- 2.7
-- 3.2
-- 3.3
-- 3.4
-- 3.5
-- pypy
-- pypy3
-script:
-- python test.py
-install:
-- python setup.py install
+python: 3.5
+env:
+  - TOXENV=26
+  - TOXENV=27
+  - TOXENV=32
+  - TOXENV=33
+  - TOXENV=34
+  - TOXENV=35
+  - TOXENV=pypy
+  - TOXENV=pypy3
+install: pip install tox
+script: tox
+
 notifications:
   email: false
 deploy:
