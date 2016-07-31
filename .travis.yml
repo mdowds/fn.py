@@ -2,12 +2,12 @@ sudo: false
 language: python
 python: 3.5
 env:
-  - TOXENV=26
-  - TOXENV=27
-  - TOXENV=32
-  - TOXENV=33
-  - TOXENV=34
-  - TOXENV=35
+  - TOXENV=py26
+  - TOXENV=py27
+  - TOXENV=py32
+  - TOXENV=py33
+  - TOXENV=py34
+  - TOXENV=py35
   - TOXENV=pypy
   - TOXENV=pypy3
 install: pip install tox
