@@ -41,5 +41,6 @@ class FingerTreeDequeTestCase(unittest.TestCase):
             sum(Deque.from_iterable(range(1, 20)))
         )
 
+
 if __name__ == '__main__':
     unittest.main()
