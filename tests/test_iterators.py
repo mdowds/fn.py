@@ -280,5 +280,5 @@ class IteratorsTestCase(unittest.TestCase):
         )
 
     def test_filterfalse(self):
-        l = iters.filterfalse(lambda x: x > 10, [1, 2, 3, 11, 12])
-        self.assertEqual([1, 2, 3], list(l))
+        filtered = iters.filterfalse(lambda x: x > 10, [1, 2, 3, 11, 12])
+        self.assertEqual([1, 2, 3], list(filtered))

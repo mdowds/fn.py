@@ -47,10 +47,9 @@ class LinkedList(object):
         return self.cons(el)
 
     def __iter__(self):
-        l = self
-        while l:
-            yield l.head
-            l = l.tail
+        while self:
+            yield self.head
+            self = self.tail
 
     def __len__(self):
         return self._count
