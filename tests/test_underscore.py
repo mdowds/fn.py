@@ -146,8 +146,7 @@ class UnderscoreTestCase(unittest.TestCase):
         self.assertFalse((_ == 10)(9))
 
     def test_none(self):
-        # FIXME: turning the '==' into 'is' throws an error
-        self.assertTrue((_ == None)(None))
+        self.assertTrue((_ == None)(None))  # noqa: E711
 
         class pushlist(list):
             def __lshift__(self, item):
