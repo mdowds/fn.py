@@ -8,6 +8,7 @@ from .uniform import reduce
 def _apply(f, args=None, kwargs=None):
     return f(*(args or []), **(kwargs or {}))
 
+
 apply = apply if version_info[0] == 2 else _apply
 
 

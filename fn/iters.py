@@ -58,6 +58,7 @@ def first_true(iterable, default=False, pred=None):
     """
     return next(filter(pred, iterable), default)
 
+
 # widely-spreaded shortcuts to get first item, all but first item,
 # second item, and first item of first item from iterator respectively
 head = first = partial(flip(nth), 0)
@@ -250,6 +251,7 @@ def flatten(items):
                 yield i
         else:
             yield item
+
 
 if version_info[0] == 3 and version_info[1] >= 3:
     from itertools import accumulate
