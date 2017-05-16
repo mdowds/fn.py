@@ -96,7 +96,7 @@ class stackless(object):
 
     __slots__ = "func",
 
-    Thunk = namedtuple('Thunk', ("func", "args", "kwargs", "is_tailcall"))
+    Thunk = namedtuple("Thunk", ("func", "args", "kwargs", "is_tailcall"))
 
     def __init__(self, func):
         self.func = func
@@ -110,6 +110,7 @@ class stackless(object):
     def __call__(self, *args, **kwargs):
         s = [self.func(*args, **kwargs)]
         r = []
+        v = None
         while s:
             try:
                 if r:
@@ -129,4 +130,4 @@ class stackless(object):
                     s.append(g)
             else:
                 r.append(v)
-        return r[0]
+        return r[0] if r else None
