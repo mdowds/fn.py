@@ -52,7 +52,7 @@ setup(
     author_email='vash0the0stampede@gmail.com',
     url='https://github.com/fnpy/fn.py',
     packages=['fn', 'fn.immutable'],
-    package_data={'': ['LICENSE', 'README.rst', 'HISTORY.rst']},
+    package_data={'': ['LICENSE', 'README.rst', 'CHANGELOG.rst']},
     include_package_data=True,
     install_requires=[],
     license=open('LICENSE').read(),
