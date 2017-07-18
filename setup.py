@@ -46,7 +46,7 @@ setup(
     long_description=(
         open('README.rst').read() +
         '\n\n' +
-        open('HISTORY.rst').read()
+        open('CHANGELOG.rst').read()
     ),
     author='fnpy team',
     author_email='vash0the0stampede@gmail.com',
