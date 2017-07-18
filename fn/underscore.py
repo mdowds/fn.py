@@ -9,6 +9,7 @@ from .func import F
 from .op import apply, flip, identity
 from .uniform import map, zip
 
+
 div = operator.div if version_info[0] == 2 else operator.truediv
 
 letters = string.letters if version_info[0] == 2 else string.ascii_letters
@@ -188,5 +189,6 @@ class _Callable(object):
     __rand__ = fmap(flip(operator.and_), "other & self")
     __ror__ = fmap(flip(operator.or_), "other | self")
     __rxor__ = fmap(flip(operator.xor), "other ^ self")
+
 
 shortcut = _Callable()

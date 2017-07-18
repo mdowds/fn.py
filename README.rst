@@ -436,19 +436,13 @@ To install ``fn.py``, simply:
 
 .. code-block:: console
 
-    $ pip install fn
-
-Or, if you absolutely must:
-
-.. code-block:: console
-
-    $ easy_install fn
+    $ pip install fn.py
 
 You can also build library from source
 
 .. code-block:: console
 
-    $ git clone https://github.com/kachayev/fn.py.git
+    $ git clone https://github.com/fnpy/fn.py.git
     $ cd fn.py
     $ python setup.py install
 
