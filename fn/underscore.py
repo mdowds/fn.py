@@ -80,6 +80,8 @@ class _Callable(object):
         )
 
     def __getattr__(self, name):
+        if name == '__wrapped__': # Guard for recursive call by doctest
+            raise AttributeError
         attr_name = _random_name()
         return self.__class__(
             F(operator.attrgetter(name)) << F(self),
