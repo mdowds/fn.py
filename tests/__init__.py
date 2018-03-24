@@ -1,6 +1,7 @@
 from .test_banker_queue import *
 from .test_composition import *
 from .test_curry import *
+from .test_doctest import *
 from .test_finger_tree import *
 from .test_iterators import *
 from .test_linked import *
