@@ -1,5 +1,5 @@
 from functools import partial, update_wrapper, wraps
-from inspect import getargspec
+from inspect import getfullargspec
 
 
 def identity(arg):
@@ -78,7 +78,7 @@ def curried(func):
                 count += len(f.args)
             f = f.func
 
-        spec = getargspec(f)
+        spec = getfullargspec(f)
 
         if count == len(spec.args) - len(args):
             return func(*args, **kwargs)
