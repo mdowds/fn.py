@@ -7,19 +7,14 @@ from pkg_resources import get_distribution, DistributionNotFound
 
 try:
     get_distribution('fn')
+    get_distribution('fn.py')
     sys.stdout.write("""
 {delimiter}
                    INSTALLATION ABORTED
 
-The module "fn" was found on this system. Unfortunately
-"fn.py" and "fn" cannot work together because they use the
-same package name, i.e. fn. The "fn" module is no longer
-maintained by the original author and "fn.py" is actually
-a maintained fork of that project.
-
-To complete this install, please uninstall "fn" (e.g.
-pip uninstall fn) and rerun the installation of "fn.py".
-{delimiter}
+One of the modules "fn" or "fn.py" were found on this system. 
+Unfortunately "fn.py" and "fn" cannot work together because 
+they use the same package name. This project is a fork of "fn.py"
 """.format(delimiter='=' * 60))
     sys.exit(0)
 except DistributionNotFound:
@@ -40,7 +35,7 @@ short = '''
 Implementation of missing features to enjoy functional programming in Python
 '''
 setup(
-    name='fn.py',
+    name='fn-mdowds',
     version=fn.__version__,
     description=short,
     long_description=(
@@ -49,8 +44,7 @@ setup(
         open('CHANGELOG.rst').read()
     ),
     author='fnpy team',
-    author_email='vash0the0stampede@gmail.com',
-    url='https://github.com/fnpy/fn.py',
+    url='https://github.com/mdowds/fn.py',
     packages=['fn', 'fn.immutable'],
     package_data={'': ['LICENSE', 'README.rst', 'CHANGELOG.rst']},
     include_package_data=True,
@@ -64,8 +58,6 @@ setup(
         'Natural Language :: English',
         'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
