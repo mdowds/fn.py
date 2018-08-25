@@ -12,3 +12,4 @@ from .test_trampoline import *
 from .test_underscore import *
 from .test_union import *
 from .test_vector import *
+from .test_either import *
