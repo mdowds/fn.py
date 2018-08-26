@@ -4,10 +4,26 @@ from itertools import (chain, combinations, cycle, dropwhile, islice, repeat,
                        starmap, takewhile, tee)
 from operator import add, attrgetter, itemgetter
 from sys import version_info
+from typing import Callable, Sequence, TypeVar
 
-from .func import F
+from .func import F, curried
 from .op import flip
-from .uniform import filterfalse, zip_longest, map, range, filter
+from .uniform import filterfalse, zip_longest, filter
+
+T = TypeVar('T')
+S = TypeVar('S')
+builtin_map = map
+
+
+@curried
+def map(f: Callable[[T], S], iterable: Sequence[T]) -> Sequence[S]:
+    result = builtin_map(f, iterable)
+    if type(iterable) is list:
+        return list(result)
+    elif type(iterable) is tuple:
+        return tuple(result)
+    else:
+        return result
 
 
 def take(limit, base):

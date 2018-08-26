@@ -7,7 +7,8 @@ from sys import version_info
 
 from .func import F
 from .op import apply, flip, identity
-from .uniform import map, zip
+from .uniform import zip
+from .iters import map
 
 
 div = operator.div if version_info[0] == 2 else operator.truediv

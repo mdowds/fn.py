@@ -6,6 +6,16 @@ from fn import _, iters
 
 class IteratorsTestCase(unittest.TestCase):
 
+    def test_map_withList(self):
+        out = iters.map(_ * 2, [2])
+        self.assertEqual(4, out[0])
+        self.assertEqual(list, type(out))
+
+    def test_map_withTuple(self):
+        out = iters.map(_ * 2, (2,))
+        self.assertEqual(4, out[0])
+        self.assertEqual(tuple, type(out))
+
     def test_take(self):
         self.assertEqual([0, 1], list(iters.take(2, range(10))))
         self.assertEqual([0, 1], list(iters.take(10, range(2))))
@@ -31,14 +41,14 @@ class IteratorsTestCase(unittest.TestCase):
 
     def test_consume(self):
         # full consuming, without limitation
-        r = iters.range(10)
+        r = range(10)
         self.assertEqual(10, len(list(r)))
         itr = iter(r)
         iters.consume(itr)
         self.assertEqual(0, len(list(itr)))
 
     def test_consume_limited(self):
-        r = iters.range(10)
+        r = range(10)
         self.assertEqual(10, len(list(r)))
         itr = iter(r)
         iters.consume(itr, 5)
@@ -207,12 +217,12 @@ class IteratorsTestCase(unittest.TestCase):
         def is_odd(x):
             return x % 2 == 1
 
-        before, after = iters.partition(is_odd, iters.range(5))
+        before, after = iters.partition(is_odd, range(5))
         self.assertEqual([0, 2, 4], list(before))
         self.assertEqual([1, 3], list(after))
 
     def test_splitat(self):
-        before, after = iters.splitat(2, iters.range(5))
+        before, after = iters.splitat(2, range(5))
         self.assertEqual([0, 1], list(before))
         self.assertEqual([2, 3, 4], list(after))
 
@@ -220,7 +230,7 @@ class IteratorsTestCase(unittest.TestCase):
         def is_even(x):
             return x % 2 == 0
 
-        before, after = iters.splitby(is_even, iters.range(5))
+        before, after = iters.splitby(is_even, range(5))
         self.assertEqual([0], list(before))
         self.assertEqual([1, 2, 3, 4], list(after))
 

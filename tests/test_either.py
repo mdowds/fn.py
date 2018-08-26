@@ -1,6 +1,6 @@
 import unittest
 
-from fnplus.either import Either
+from fn.either import Either
 
 
 class TestEither(unittest.TestCase):

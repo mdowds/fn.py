@@ -41,4 +41,4 @@ class CompositionTestCase(unittest.TestCase):
 
     def test_pipe_partial(self):
         func = F() >> (iters.filter, _ < 6) >> sum
-        self.assertEqual(15, func(iters.range(10)))
+        self.assertEqual(15, func(range(10)))

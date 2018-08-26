@@ -25,7 +25,7 @@ class StreamTestCase(unittest.TestCase):
         assert list(s) == [1, 2, 3, 4, 5]
 
     def test_lazy_slicing(self):
-        s = Stream() << iters.range(10)
+        s = Stream() << range(10)
         self.assertEqual(s.cursor(), 0)
 
         s_slice = s[:5]
@@ -33,7 +33,7 @@ class StreamTestCase(unittest.TestCase):
         self.assertEqual(len(list(s_slice)), 5)
 
     def test_lazy_slicing_recursive(self):
-        s = Stream() << iters.range(10)
+        s = Stream() << range(10)
         sf = s[1:3][0:2]
 
         self.assertEqual(s.cursor(), 0)
@@ -43,7 +43,7 @@ class StreamTestCase(unittest.TestCase):
         from operator import add
 
         f = Stream()
-        fib = f << [0, 1] << iters.map(add, f, iters.drop(1, f))
+        fib = f << [0, 1] << map(add, f, iters.drop(1, f))
 
         self.assertEqual(
             [0, 1, 1, 2, 3, 5, 8, 13, 21, 34],

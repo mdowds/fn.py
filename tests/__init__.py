@@ -7,7 +7,7 @@ from .test_iterators import *
 from .test_linked import *
 from .test_operator import *
 from .test_option import *
-from .test_stram import *
+from .test_stream import *
 from .test_trampoline import *
 from .test_underscore import *
 from .test_union import *

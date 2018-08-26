@@ -1,7 +1,7 @@
 from itertools import chain
 from sys import version_info
 
-from .iters import map, range
+from .iters import map
 
 if version_info[0] == 2:
     from sys import maxint
