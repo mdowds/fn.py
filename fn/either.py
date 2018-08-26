@@ -1,7 +1,7 @@
 from functools import partial
-from typing import Generic, Union, Callable, Type, Optional, TypeVar
+from typing import Generic, Union, Callable, Type, Optional
 
-from .monad import T, Monad, TCaller
+from .monad import T, S, Monad, TCaller
 
 EitherFunc = Callable[[T], 'Either']
 TReturner = Callable[..., T]
@@ -40,12 +40,12 @@ class Either(Monad, Generic[T]):
 
     # Public instance methods
 
-    def call(self, f: TCaller) -> EitherTOrS:
+    def call(self, f: TCaller) -> 'Either[S]':
         if self._error is not None or self._value is None:
             return self
         return Either(f(self._value))
 
-    def try_call(self, f: TCaller) -> EitherTOrS:
+    def try_call(self, f: TCaller) -> 'Either[S]':
         try:
             return self.call(f)
         except Exception as e:
