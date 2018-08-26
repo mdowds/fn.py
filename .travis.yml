@@ -2,29 +2,26 @@ sudo: false
 language: python
 python: 3.5
 env:
-  - TOXENV=codestyle
-  - TOXENV=py26
-  - TOXENV=py27
-  - TOXENV=py33
-  - TOXENV=py34
-  - TOXENV=py35
-  - TOXENV=pypy
+- TOXENV=codestyle
+- TOXENV=py33
+- TOXENV=py34
+- TOXENV=py35
+- TOXENV=pypy
 install: pip install tox
 script: tox
 matrix:
   include:
-    - python: 3.6
-      env: TOXENV=py36
-    - python: pypy3
-      env: TOXENV=pypy3
-
+  - python: 3.6
+    env: TOXENV=py36
+  - python: pypy3
+    env: TOXENV=pypy3
 notifications:
   email: false
 deploy:
   provider: pypi
-  user: jacobbridges
+  user: mdowds
   password:
-    secure: rRAgxG6QXVV0emTKcrGmRW0LLofac5tSqQtBhU623DIGedFOOEdqinkak+aqWkrnwXxb53rClTcn0jGvEhJuATxtzCYg4hCXvriu53r6f7zoQELbDJZS4BA9S34rkZRb7LcnfIS8use+31SNFlpeqe0QqyLftKOmqHEwnsv7DNVs6Cnzo0r8tcag1cSnvGLutOYRMU8Pb9HtuOH8kga4nzqYLuLvM7Q9qwRdkT6d+hEmAFmzGDttU0P+lGpanTxDVeQPxZ4ksgTXVuvFuGquHRM157ZeLewv3ELUdeijYi6Fwfb8T36Ri1iaPZqpr8KxKVu7aeWKBDYNV7VX0p17D6b05vchrVsfNh5jtSSY9z+bDjvbOpxNubAwBVEaSf4IfpF+EwoVKn776/IsIBZx4eBnFFd3Fk1WfOMI419QGukGUN4Qwn25fqKd3rfmVsHcJCOXSgcwjwfhqVVRAzrc0oO1orgluMpTWvlk7h0t3ry/M/3sAeJ8eVdPGL9zQhwKUItyeEN44sEosFjYG8BZwAhlP2s4OEvsGJ8esD/Qj3B73U2uEH4mVPn/zgyac19KnvV/BiWrtfIlhYMq3qhrA0djpQFEmMPWtfCJ8RWizkqqXzMUSGC2d4zRNmGbWlV9b34frDh0b6WfBJOmsjmvBRX9oKtxBrB6EZ7Dljkmah4=
+    secure: WrgkqaL1uyoS55cBYn5PbGP7liJrHAxsSxa7abbjAcrZpsQ2Ix5pDCU4jAtoBd3VWj98hGEBUiWxsnHUWNWwwCxgU3OJJ8Xk6xstlYu9F3sACa4/WpoYIGr8SKAYeJVyQ525eoamH0HMyQUG3iiFC1lSa4YBbFzpJglMPLRU1BQ4lXFjd2+P66jk8ok/Usy6la7c5QmwmIvatmLT7EOY1cRmlYcNzfEYmhSki32T9TL/2cI7LxC6FknsAFpeG+IbN/w2V35vsVsARwBWrCbgwhSrXkGSUZ0QeQpAlgTDnftjQx/StVMizsqYO7GF2dwwVIDxuEyMDtocPd7eATHVqEL9/3KI2yoBBn19wJM4DXCE1FzbeGrF974JMNbw758N1Bl1+KevXTrCPGJ/0U/8jSzGYnAcAIpW5UReniZdF46+46B5n92aKRtWGrXL9Lxthf45q/+xNyE8Fl4+3Gqyx25CKZNrYqbIC6a+yLFPEMNEiHAh+r/hzuNCZmdkT6xyfccbktu548QAxcTDIlZwhVSub2JAwe1pO6tFcHqE6Kw/20VKEjGoyselvcNqZtWWtzGbT7ZEXuTBYShJely/qr47e7JKnkOtOHkjShAqITHHMTWW2LO0t5+tPDbntRlJMec++Z/DQ4gHPrRnDunzAtaMjsnyIiOmC3KMUOWmNlI=
   on:
     branch: master
     tags: true
