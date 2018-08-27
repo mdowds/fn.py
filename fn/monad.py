@@ -68,7 +68,7 @@ class Either(Monad, Generic[T]):
     Exception()
     """
 
-    def __init__(self, value: T, error: Exception=None) -> None:
+    def __init__(self, value: T, error: Exception = None) -> None:
         super().__init__(value)
         self._error = error or None
 
