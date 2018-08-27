@@ -1,6 +1,6 @@
 import unittest
 
-from fn.either import Either
+from fn.monad import Either
 
 
 class TestEither(unittest.TestCase):
