@@ -50,7 +50,7 @@ class TestEither(unittest.TestCase):
         self.assertEqual("Foo", either.error.args[0])
 
     def test_bind_with_error_func(self):
-        def _raiser(x): raise Exception("Foo")
+        def _raiser(): raise Exception("Foo")
         either = Either(1).bind(_raiser)
         self.assertIsNone(either.value)
         self.assertEqual("Foo", either.error.args[0])

@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractmethod
 
 T = TypeVar('T')
 S = TypeVar('S')
-TCaller = Callable[[T], S]
+TModifier = Callable[[T], S]
 TReturner = Callable[..., T]
 
 
@@ -18,7 +18,7 @@ class Monad(Generic[T]):
         return self._value
 
     @abstractmethod
-    def bind(self, f: TCaller) -> 'Monad[S]':
+    def bind(self, f: TModifier) -> 'Monad[S]':
         pass
 
 
@@ -36,11 +36,11 @@ class Pipe(Monad, Generic[T]):
     15
     """
 
-    def __rshift__(self, f: TCaller) -> 'Pipe[S]':
+    def __rshift__(self, f: TModifier) -> 'Pipe[S]':
         """Overload >> operator for Pipe instances"""
         return self.bind(f)
 
-    def bind(self, f: TCaller) -> 'Pipe[S]':
+    def bind(self, f: TModifier) -> 'Pipe[S]':
         """Apply the given function, producing
         new instance containing the new value"""
         return Pipe(f(self.value))
@@ -94,11 +94,11 @@ class Either(Monad, Generic[T]):
     def is_error(self) -> bool:
         return self._error is not None
 
-    def __rshift__(self, f: TCaller) -> 'Either[S]':
+    def __rshift__(self, f: TModifier) -> 'Either[S]':
         """Overload >> operator for Either instances"""
         return self.bind(f)
 
-    def bind(self, f: TCaller) -> 'Either[S]':
+    def bind(self, f: TModifier) -> 'Either[S]':
         """Try applying the given function, producing
         new instance containing either the new value
         or the error encountered"""
