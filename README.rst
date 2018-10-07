@@ -1,12 +1,8 @@
-Fn.py: enjoy FP in Python
-=========================
+Fn.py (mdowds fork)
+===================
 
-.. image:: https://badges.gitter.im/fnpy/fn.py.svg
-   :alt: Join the chat at https://gitter.im/fnpy/fn.py
-   :target: https://gitter.im/fnpy/fn.py?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-   
-.. image:: https://travis-ci.org/fnpy/fn.py.svg?branch=master
-    :target: https://travis-ci.org/fnpy/fn.py
+.. image:: https://travis-ci.org/mdowds/fn.py.svg?branch=master
+    :target: https://travis-ci.org/mdowds/fn.py
 
 Despite the fact that Python is not pure-functional programming
 language, it's multi-paradigm PL and it gives you enough freedom to take
@@ -21,9 +17,60 @@ practical advantages to the functional style:
 ``Fn.py`` library provides you with missing "batteries" to get maximum
 from functional approach even in mostly-imperative program.
 
-More about functional approach from my Pycon UA 2012 talks: `Functional
-Programming with
-Python <http://kachayev.github.com/talks/uapycon2012/index.html>`_.
+Features added by the fork
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Pipe monad
+----------
+
+Provide simple syntax for piping values between single-parameter functions.
+
+Usage example:
+
+.. code-block::python
+
+>>> val = Pipe(10) >> (_ + 10) >> (_ + 5)
+>>> print(val)
+25
+>>> val = Pipe(range(10)) >> (filter, _ < 6) >> sum
+>>> print(val)
+15
+
+Either monad
+------------
+
+Wrapper for values that could be an expected type or an error.
+
+Trying to apply further functions will cause them
+to be applied to values, or skipped for errors.
+
+Usage examples:
+
+.. code-block::python
+
+>>> val = Either(10) >> (_ + 10) >> (_ + 5)
+>>> print(val)
+25
+
+>>> def raiser(x): raise Exception()
+>>> val = Either(10) >> raiser >> (_ + 5)
+>>> if val.is_error:
+>>>     print(val.error)
+>>> else:
+>>>     print(val.value)
+Exception()
+
+Support for type hints
+----------------------
+
+This fork drops support for Python versions older than 3.5 in order to provide better support for type hints. Changes include:
+
+* The ``@curried`` decorator can now be used on functions with type hints
+* ``map`` returns either a list or tuple depending on what type it was called with
+* ``Pipe`` and ``Either`` both provide type hints (known issue - the overloaded ``>>`` operator produces incorrect type errors)
+
+Original fn.py features
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Scala-style lambdas definition
 ------------------------------
@@ -371,117 +418,12 @@ Function currying
     15
 
 
-Functional style for error-handling
------------------------------------
-
-``fn.monad.Option`` represents optional values, each instance of ``Option`` can be either instance of ``Full`` or ``Empty``. It provides you with simple way to write long computation sequences and get rid of many ``if/else`` blocks. See usage examples below.
-
-Assume that you have ``Request`` class that gives you parameter value by its name. To get uppercase notation for non-empty striped value:
-
-.. code-block:: python
-
-    class Request(dict):
-        def parameter(self, name):
-            return self.get(name, None)
-
-    r = Request(testing="Fixed", empty="   ")
-    param = r.parameter("testing")
-    if param is None:
-        fixed = ""
-    else:
-        param = param.strip()
-        if len(param) == 0:
-            fixed = ""
-        else:
-            fixed = param.upper()
-
-
-Hmm, looks ugly.. Update code with ``fn.monad.Option``:
-
-.. code-block:: python
-
-    from operator import methodcaller
-    from fn.monad import optionable
-
-    class Request(dict):
-        @optionable
-        def parameter(self, name):
-            return self.get(name, None)
-
-    r = Request(testing="Fixed", empty="   ")
-    fixed = r.parameter("testing")
-             .map(methodcaller("strip"))
-             .filter(len)
-             .map(methodcaller("upper"))
-             .get_or("")
-
-``fn.monad.Option.or_call`` is good method for trying several variant to end computation. I.e. use have ``Request`` class with optional attributes ``type``, ``mimetype``, ``url``. You need to evaluate "request type" using at least one attribute:
-
-.. code-block:: python
-
-    from fn.monad import Option
-
-    request = dict(url="face.png", mimetype="PNG")
-    tp = Option \
-            .from_value(request.get("type", None)) \ # check "type" key first
-            .or_call(from_mimetype, request) \ # or.. check "mimetype" key
-            .or_call(from_extension, request) \ # or... get "url" and check extension
-            .get_or("application/undefined")
-
 
 Installation
-------------
+~~~~~~~~~~~~
 
 To install ``fn.py``, simply:
 
 .. code-block:: console
 
-    $ pip install fn.py
-
-You can also build library from source
-
-.. code-block:: console
-
-    $ git clone https://github.com/fnpy/fn.py.git
-    $ cd fn.py
-    $ python setup.py install
-
-Work in progress
-----------------
-
-"Roadmap":
-
-- ``fn.monad.Either`` to deal with error logging
--  C-accelerator for most modules
-
-Ideas to think about:
-
--  Scala-style for-yield loop to simplify long map/filter blocks
-
-Contribute
-----------
-
-If you found a bug:
-
-1. Check for open issues or open a fresh issue to start a discussion
-   around a feature idea or a bug.
-2. Fork the repository on Github to start making your changes to the
-   master branch (or branch off of it).
-3. Write a test which shows that the bug was fixed or that the feature
-   works as expected.
-
-If you like fixing bugs:
-
-1. Check for open issues with the label "Help Wanted" and either claim
-   it or collaborate with those who have claimed it.
-2. Fork the repository on Github to start making your changes to the
-   master branch (or branch off of it).
-3. Write a test which shows that the bug was fixed or that the feature
-   works as expected.
-
-How to contact the maintainers
---------------
-
-- Gitter: https://gitter.im/fnpy/fn.py
-- Jacob's (Organization Owner) Email: him <at> jacobandkate143.com
-- Alex's (Original Project Owner) Email: kachayev <at> gmail.com
+    $ pip install fn-mdowds
