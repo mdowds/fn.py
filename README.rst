@@ -17,6 +17,15 @@ practical advantages to the functional style:
 ``Fn.py`` library provides you with missing "batteries" to get maximum
 from functional approach even in mostly-imperative program.
 
+Installation
+~~~~~~~~~~~~
+
+To install ``fn.py``, simply:
+
+.. code-block::console
+
+    $ pip install fn-mdowds
+
 Features added by the fork
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -29,11 +38,12 @@ Usage example:
 
 .. code-block::python
 
+>>> from fn.monad import Pipe
 >>> val = Pipe(10) >> (_ + 10) >> (_ + 5)
->>> print(val)
+>>> print(val.value)
 25
 >>> val = Pipe(range(10)) >> (filter, _ < 6) >> sum
->>> print(val)
+>>> print(val.value)
 15
 
 Either monad
@@ -48,6 +58,7 @@ Usage examples:
 
 .. code-block::python
 
+>>> from fn.monad import Either
 >>> val = Either(10) >> (_ + 10) >> (_ + 5)
 >>> print(val)
 25
@@ -418,12 +429,3 @@ Function currying
     15
 
 
-
-Installation
-~~~~~~~~~~~~
-
-To install ``fn.py``, simply:
-
-.. code-block:: console
-
-    $ pip install fn-mdowds
