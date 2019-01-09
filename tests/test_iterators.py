@@ -16,6 +16,16 @@ class IteratorsTestCase(unittest.TestCase):
         self.assertEqual(4, out[0])
         self.assertEqual(tuple, type(out))
 
+    def test_filter_withList(self):
+        out = iters.filter(_ < 10, [1, 2, 11])
+        self.assertEqual([1, 2], out)
+        self.assertEqual(list, type(out))
+
+    def test_filter_withTuple(self):
+        out = iters.filter(_ < 10, (1, 2, 11))
+        self.assertEqual((1, 2), out)
+        self.assertEqual(tuple, type(out))
+
     def test_take(self):
         self.assertEqual([0, 1], list(iters.take(2, range(10))))
         self.assertEqual([0, 1], list(iters.take(10, range(2))))

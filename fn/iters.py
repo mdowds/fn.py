@@ -8,16 +8,28 @@ from typing import Callable, Sequence, TypeVar
 
 from .func import F, curried
 from .op import flip
-from .uniform import filterfalse, zip_longest, filter
+from .uniform import filterfalse, zip_longest
 
 T = TypeVar('T')
 S = TypeVar('S')
 builtin_map = map
+builtin_filter = filter
 
 
 @curried
 def map(f: Callable[[T], S], iterable: Sequence[T]) -> Sequence[S]:
     result = builtin_map(f, iterable)
+    if type(iterable) is list:
+        return list(result)
+    elif type(iterable) is tuple:
+        return tuple(result)
+    else:
+        return result
+
+
+@curried
+def filter(f: Callable[[T], bool], iterable: Sequence[T]) -> Sequence[S]:
+    result = builtin_filter(f, iterable)
     if type(iterable) is list:
         return list(result)
     elif type(iterable) is tuple:

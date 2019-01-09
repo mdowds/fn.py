@@ -4,9 +4,8 @@ from sys import version_info
 # differences: this one will return generator
 # even in Python 2.*
 if version_info[0] == 2:
-    from itertools import izip as zip, imap as map, ifilter as filter
+    from itertools import izip as zip, imap as map
 
-filter = filter
 zip = zip
 
 if version_info[0] == 3:
