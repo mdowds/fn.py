@@ -4,7 +4,7 @@ from itertools import (chain, combinations, cycle, dropwhile, islice, repeat,
                        starmap, takewhile, tee)
 from operator import attrgetter, itemgetter
 from sys import version_info
-from typing import Callable, TypeVar, Tuple, List, Iterable, Iterator, Optional
+from typing import Callable, TypeVar, Tuple, List, Iterable, Iterator, Optional, Any
 
 from .func import F, curried
 from .uniform import filterfalse, zip_longest
@@ -299,3 +299,8 @@ def flatten(items):
                 yield i
         else:
             yield item
+
+
+@curried
+def sort(f: Callable[[T], Any], iterable: Iterable[T], **kwargs) -> Iterable[T]:
+    return sorted(iterable, key=f, **kwargs)

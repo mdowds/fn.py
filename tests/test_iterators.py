@@ -328,3 +328,11 @@ class IteratorsTestCase(unittest.TestCase):
     def test_filterfalse(self):
         filtered = iters.filterfalse(lambda x: x > 10, [1, 2, 3, 11, 12])
         self.assertEqual([1, 2, 3], list(filtered))
+
+    def test_sort(self):
+        sorted = iters.sort(lambda x: x['id'], [{'id': 2}, {'id': 3}, {'id': 1}])
+        self.assertEqual([{'id': 1}, {'id': 2}, {'id': 3}], sorted)
+
+    def test_sort_reversed(self):
+        sorted = iters.sort(lambda x: x['id'], [{'id': 2}, {'id': 3}, {'id': 1}], reverse=True)
+        self.assertEqual([{'id': 3}, {'id': 2}, {'id': 1}], sorted)
