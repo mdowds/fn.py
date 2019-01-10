@@ -2,7 +2,7 @@ from collections import deque
 from functools import partial
 from itertools import (chain, combinations, cycle, dropwhile, islice, repeat,
                        starmap, takewhile, tee)
-from operator import add, attrgetter, itemgetter
+from operator import attrgetter, itemgetter
 from sys import version_info
 from typing import Callable, TypeVar, Tuple, List, Iterable, Iterator, Optional
 
@@ -59,7 +59,7 @@ def takelast(n: int, iterable: Iterable[T]) -> Iterable[T]:
 
 
 def droplast(n: int, iterable: Iterable[T]) -> Iterable[T]:
-    "Return iterator to produce items from origin except last n"
+    """Return iterator to produce items from origin except last n"""
     t1, t2 = tee(iterable)
     return map(itemgetter(0), zip(t1, islice(t2, n, None)))
 
@@ -291,34 +291,11 @@ def flatten(items):
 
     http://docs.python.org/3.4/library/itertools.html#itertools-recipes
     """
-    str_type = basestring if version_info[0] < 3 else str
     for item in items:
         is_iterable = isinstance(item, Iterable)
-        is_string_or_bytes = isinstance(item, (str_type, bytes, bytearray))
+        is_string_or_bytes = isinstance(item, (str, bytes, bytearray))
         if is_iterable and not is_string_or_bytes:
             for i in flatten(item):
                 yield i
         else:
             yield item
-
-
-if version_info[0] == 3 and version_info[1] >= 3:
-    from itertools import accumulate
-else:
-    def accumulate(iterable, func=add):
-        """Make an iterator that returns accumulated sums.
-        Elements may be any addable type including Decimal or Fraction.
-        If the optional func argument is supplied, it should be a
-        function of two arguments and it will be used instead of addition.
-
-        Origin implementation:
-        http://docs.python.org/dev/library/itertools.html#itertools.accumulate
-
-        Backported to work with all python versions (< 3.3)
-        """
-        it = iter(iterable)
-        total = next(it)
-        yield total
-        for element in it:
-            total = func(total, element)
-            yield total

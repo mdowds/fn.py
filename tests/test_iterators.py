@@ -325,16 +325,6 @@ class IteratorsTestCase(unittest.TestCase):
                 [bytearray(b'abc'), b'\xd1\x8f'.decode('utf8'), b'y']
             )))
 
-    def test_accumulate(self):
-        self.assertEqual(
-            [1, 3, 6, 10, 15],
-            list(iters.accumulate([1, 2, 3, 4, 5]))
-        )
-        self.assertEqual(
-            [1, 2, 6, 24, 120],
-            list(iters.accumulate([1, 2, 3, 4, 5], operator.mul))
-        )
-
     def test_filterfalse(self):
         filtered = iters.filterfalse(lambda x: x > 10, [1, 2, 3, 11, 12])
         self.assertEqual([1, 2, 3], list(filtered))
