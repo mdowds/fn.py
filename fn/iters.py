@@ -4,10 +4,9 @@ from itertools import (chain, combinations, cycle, dropwhile, islice, repeat,
                        starmap, takewhile, tee)
 from operator import add, attrgetter, itemgetter
 from sys import version_info
-from typing import Callable, TypeVar, Tuple, List, Iterable
+from typing import Callable, TypeVar, Tuple, List, Iterable, Iterator, Optional
 
 from .func import F, curried
-from .op import flip
 from .uniform import filterfalse, zip_longest
 
 T = TypeVar('T')
@@ -46,26 +45,26 @@ def filter_tuple(f: Callable[[T], bool], iterable: Tuple[T, ...]) -> Tuple[S, ..
     return tuple(filter(f, iterable))
 
 
-def take(limit, base):
+def take(limit: int, base: Iterable[T]) -> Iterable[T]:
     return islice(base, limit)
 
 
-def drop(limit, base):
+def drop(limit: int, base: Iterable[T]) -> Iterable[T]:
     return islice(base, limit, None)
 
 
-def takelast(n, iterable):
-    "Return iterator to produce last n items from origin"
+def takelast(n: int, iterable: Iterable[T]) -> Iterable[T]:
+    """Return iterator to produce last n items from origin"""
     return iter(deque(iterable, maxlen=n))
 
 
-def droplast(n, iterable):
+def droplast(n: int, iterable: Iterable[T]) -> Iterable[T]:
     "Return iterator to produce items from origin except last n"
     t1, t2 = tee(iterable)
     return map(itemgetter(0), zip(t1, islice(t2, n, None)))
 
 
-def consume(iterator, n=None):
+def consume(iterator: Iterator[T], n: Optional[int] =None):
     """Advance the iterator n-steps ahead. If n is none, consume entirely.
 
     http://docs.python.org/3.4/library/itertools.html#itertools-recipes
@@ -79,7 +78,7 @@ def consume(iterator, n=None):
         next(islice(iterator, n, n), None)
 
 
-def nth(iterable, n, default=None):
+def nth(iterable: Iterable[T], n: int, default: T = None) -> T:
     """Returns the nth item or a default value
 
     http://docs.python.org/3.4/library/itertools.html#itertools-recipes
@@ -95,10 +94,24 @@ def first_true(iterable, default=False, pred=None):
     return next(filter(pred, iterable), default)
 
 
+def head(iterable: Iterable[T]) -> T:
+    return nth(iterable, 0)
+
+
+def first(iterable: Iterable[T]) -> T:
+    return head(iterable)
+
+
+def tail(iterable: Iterable[T]) -> Iterable[T]:
+    return drop(1, iterable)
+
+
+def rest(iterable: Iterable[T]) -> Iterable[T]:
+    return tail(iterable)
+
+
 # widely-spreaded shortcuts to get first item, all but first item,
 # second item, and first item of first item from iterator respectively
-head = first = partial(flip(nth), 0)
-tail = rest = partial(drop, 1)
 second = F(rest) >> first
 ffirst = F(first) >> first
 

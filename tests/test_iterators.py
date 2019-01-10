@@ -101,7 +101,15 @@ class IteratorsTestCase(unittest.TestCase):
         self.assertEqual(1, iters.head(gen()))
 
     def test_first(self):
-        self.assertEqual(iters.first, iters.head)  # Check if same object
+        self.assertEqual(0, iters.first([0, 1, 2]))
+        self.assertEqual(None, iters.first([]))
+
+        def gen():
+            yield 1
+            yield 2
+            yield 3
+
+        self.assertEqual(1, iters.first(gen()))
 
     def test_tail(self):
         self.assertEqual([1, 2], list(iters.tail([0, 1, 2])))
@@ -115,7 +123,15 @@ class IteratorsTestCase(unittest.TestCase):
         self.assertEqual([2, 3], list(iters.tail(gen())))
 
     def test_rest(self):
-        self.assertEqual(iters.rest, iters.tail)  # Check if same object
+        self.assertEqual([1, 2], list(iters.rest([0, 1, 2])))
+        self.assertEqual([], list(iters.rest([])))
+
+        def gen():
+            yield 1
+            yield 2
+            yield 3
+
+        self.assertEqual([2, 3], list(iters.rest(gen())))
 
     def test_second(self):
         self.assertEqual(2, iters.second([1, 2, 3]))
