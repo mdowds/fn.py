@@ -1,10 +1,10 @@
-from collections import Iterable, deque
+from collections import deque
 from functools import partial
 from itertools import (chain, combinations, cycle, dropwhile, islice, repeat,
                        starmap, takewhile, tee)
 from operator import add, attrgetter, itemgetter
 from sys import version_info
-from typing import Callable, Sequence, TypeVar
+from typing import Callable, TypeVar, Tuple, List, Iterable
 
 from .func import F, curried
 from .op import flip
@@ -17,25 +17,33 @@ builtin_filter = filter
 
 
 @curried
-def map(f: Callable[[T], S], iterable: Sequence[T]) -> Sequence[S]:
-    result = builtin_map(f, iterable)
-    if type(iterable) is list:
-        return list(result)
-    elif type(iterable) is tuple:
-        return tuple(result)
-    else:
-        return result
+def map(f: Callable[[T], S], iterable: Iterable[T]) -> Iterable[S]:
+    return builtin_map(f, iterable)
 
 
 @curried
-def filter(f: Callable[[T], bool], iterable: Sequence[T]) -> Sequence[S]:
-    result = builtin_filter(f, iterable)
-    if type(iterable) is list:
-        return list(result)
-    elif type(iterable) is tuple:
-        return tuple(result)
-    else:
-        return result
+def map_list(f: Callable[[T], S], iterable: List[T]) -> List[S]:
+    return list(map(f, iterable))
+
+
+@curried
+def map_tuple(f: Callable[[T], S], iterable: Tuple[T, ...]) -> Tuple[S, ...]:
+    return tuple(map(f, iterable))
+
+
+@curried
+def filter(f: Callable[[T], bool], iterable: Iterable[T]) -> Iterable[S]:
+    return builtin_filter(f, iterable)
+
+
+@curried
+def filter_list(f: Callable[[T], bool], iterable: List[T]) -> List[S]:
+    return list(filter(f, iterable))
+
+
+@curried
+def filter_tuple(f: Callable[[T], bool], iterable: Tuple[T, ...]) -> Tuple[S, ...]:
+    return tuple(filter(f, iterable))
 
 
 def take(limit, base):

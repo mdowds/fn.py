@@ -7,22 +7,42 @@ from fn import _, iters
 class IteratorsTestCase(unittest.TestCase):
 
     def test_map_withList(self):
-        out = iters.map(_ * 2, [2])
+        out = list(iters.map(_ * 2, [2]))
         self.assertEqual(4, out[0])
         self.assertEqual(list, type(out))
 
     def test_map_withTuple(self):
-        out = iters.map(_ * 2, (2,))
+        out = tuple(iters.map(_ * 2, (2,)))
+        self.assertEqual(4, out[0])
+        self.assertEqual(tuple, type(out))
+
+    def test_map_list(self):
+        out = iters.map_list(_ * 2, [2])
+        self.assertEqual(4, out[0])
+        self.assertEqual(list, type(out))
+
+    def test_map_tuple(self):
+        out = iters.map_tuple(_ * 2, (2,))
         self.assertEqual(4, out[0])
         self.assertEqual(tuple, type(out))
 
     def test_filter_withList(self):
-        out = iters.filter(_ < 10, [1, 2, 11])
+        out = list(iters.filter(_ < 10, [1, 2, 11]))
         self.assertEqual([1, 2], out)
         self.assertEqual(list, type(out))
 
     def test_filter_withTuple(self):
-        out = iters.filter(_ < 10, (1, 2, 11))
+        out = tuple(iters.filter(_ < 10, (1, 2, 11)))
+        self.assertEqual((1, 2), out)
+        self.assertEqual(tuple, type(out))
+
+    def test_filter_list(self):
+        out = iters.filter_list(_ < 10, [1, 2, 11])
+        self.assertEqual([1, 2], out)
+        self.assertEqual(list, type(out))
+
+    def test_filter_tuple(self):
+        out = iters.filter_tuple(_ < 10, (1, 2, 11))
         self.assertEqual((1, 2), out)
         self.assertEqual(tuple, type(out))
 

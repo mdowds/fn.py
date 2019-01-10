@@ -77,7 +77,9 @@ Support for type hints
 This fork drops support for Python versions older than 3.5 in order to provide better support for type hints. Changes include:
 
 * The ``@curried`` decorator can now be used on functions with type hints
-* ``map`` and ``filter`` return either a list or tuple depending on what type they were called with
+* Curried versions of ``map`` and ``filter`` that can be imported from ``fn.iters``
+* ``map_list`` and ``filter_list`` which will convert the output of the map or filter to a list
+* ``map_tuple`` and ``filter_tuple`` which will convert the output of the map or filter to a list
 * ``Pipe`` and ``Either`` both provide type hints (known issue - the overloaded ``>>`` operator produces incorrect type errors)
 
 Original fn.py features
